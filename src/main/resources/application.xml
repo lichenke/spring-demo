@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.babyblue.pojo.User" id="user" name="lichenke test" primary="true">
+        <property name="age" value="28"></property>
+        <property name="name" value="李宸可"></property>
+    </bean>
+
+    <bean class="com.babyblue.pojo.User" id="user1" name="lichenke1 test1">
+        <property name="age" value="28"></property>
+        <property name="name" value="李宸可"></property>
+    </bean>
+
+    <bean class="com.babyblue.pojo.Company" id="company"></bean>
+</beans>
