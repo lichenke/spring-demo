@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7f97765-39d5-453f-92a6-90a2f036e316" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/pojo/Company.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/pojo/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/babyblue/SpringTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/config/JavaConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/factory/DynamicFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/factory/StaticFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/pojo_/Cat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/pojo_/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-dynamic-factory.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-static-factory.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application01.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/babyblue/SpringWithAnnotationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/babyblue/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/babyblue/pojo/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/babyblue/SpringTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/babyblue/SpringWithXMLTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +34,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -50,32 +56,29 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/lichenke/IdeaProjects/personal/spring-demo/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Facets",
     "project.structure.proportion": "0.16894531",
-    "project.structure.side.proportion": "0.120214395",
+    "project.structure.side.proportion": "0.47764707",
     "settings.editor.selected.configurable": "MavenSettings",
+    "spring.configuration.checksum": "be6b9fbdeec6980f5412d6a5d85b6de8",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.SpringTest.func_test_bean_factory">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.babyblue.App" />
-      <module name="spring-demo" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.babyblue.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SpringTest.func1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.babyblue.pojo_" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.SpringWithAnnotationTest.func_get_bean">
+    <configuration name="SpringWithAnnotationTest.func_get_bean" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-demo" />
       <extension name="coverage">
         <pattern>
@@ -84,14 +87,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.babyblue" />
-      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringTest" />
-      <option name="METHOD_NAME" value="func1" />
+      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringWithAnnotationTest" />
+      <option name="METHOD_NAME" value="func_get_bean" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SpringTest.func2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SpringWithXMLTest.func_dynamic_factory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-demo" />
       <extension name="coverage">
         <pattern>
@@ -100,14 +103,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.babyblue" />
-      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringTest" />
-      <option name="METHOD_NAME" value="func2" />
+      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringWithXMLTest" />
+      <option name="METHOD_NAME" value="func_dynamic_factory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SpringTest.func_test_application_context" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SpringWithXMLTest.func_init_instance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-demo" />
       <extension name="coverage">
         <pattern>
@@ -116,14 +119,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.babyblue" />
-      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringTest" />
-      <option name="METHOD_NAME" value="func_test_application_context" />
+      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringWithXMLTest" />
+      <option name="METHOD_NAME" value="func_init_instance" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SpringTest.func_test_bean_factory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SpringWithXMLTest.func_other_type_injection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-demo" />
       <extension name="coverage">
         <pattern>
@@ -132,8 +135,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.babyblue" />
-      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringTest" />
-      <option name="METHOD_NAME" value="func_test_bean_factory" />
+      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringWithXMLTest" />
+      <option name="METHOD_NAME" value="func_other_type_injection" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringWithXMLTest.func_static_factory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.babyblue.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.babyblue" />
+      <option name="MAIN_CLASS_NAME" value="com.babyblue.SpringWithXMLTest" />
+      <option name="METHOD_NAME" value="func_static_factory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -141,11 +160,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SpringTest.func_test_bean_factory" />
-        <item itemvalue="JUnit.SpringTest.func_test_application_context" />
-        <item itemvalue="JUnit.SpringTest.func2" />
-        <item itemvalue="JUnit.SpringTest.func1" />
-        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.SpringWithAnnotationTest.func_get_bean" />
+        <item itemvalue="JUnit.SpringWithXMLTest.func_other_type_injection" />
+        <item itemvalue="JUnit.SpringWithXMLTest.func_init_instance" />
+        <item itemvalue="JUnit.SpringWithXMLTest.func_dynamic_factory" />
+        <item itemvalue="JUnit.SpringWithXMLTest.func_static_factory" />
       </list>
     </recent_temporary>
   </component>
@@ -158,6 +177,7 @@
       <option name="presentableId" value="Default" />
       <updated>1691427139051</updated>
       <workItem from="1691427140059" duration="3481000" />
+      <workItem from="1691501994573" duration="5545000" />
     </task>
     <servers />
   </component>
@@ -199,5 +219,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/babyblue/factory/StaticFactory.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

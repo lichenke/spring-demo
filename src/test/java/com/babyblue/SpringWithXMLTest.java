@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
-public class SpringTest {
+public class SpringWithXMLTest {
 
     @Test
     public void func_normal_create() {
@@ -61,4 +61,39 @@ public class SpringTest {
         // 此方法已过时
         BeanFactory bf = new XmlBeanFactory(new ClassPathResource("application.xml"));
     }
+
+    @Test
+    public void func_static_factory() {
+        ApplicationContext ac =  new ClassPathXmlApplicationContext("application-static-factory.xml");
+        User user = ac.getBean("user", User.class);
+        user.sayHello();
+    }
+
+    @Test
+    public void func_dynamic_factory() {
+        ApplicationContext ac =  new ClassPathXmlApplicationContext("application-dynamic-factory.xml");
+        User user = ac.getBean("user", User.class);
+        user.sayHello();
+    }
+
+    @Test
+    public void func_init_instance() {
+        ApplicationContext ac =  new ClassPathXmlApplicationContext("application.xml");
+        // 属性注入
+        User user1 = ac.getBean("user1", User.class);
+        // 构造器注入注入
+        User user2 = ac.getBean("user2", User.class);
+        System.out.println(user1);
+        System.out.println(user2);
+    }
+
+    @Test
+    public void func_other_type_injection() {
+        ApplicationContext ac =  new ClassPathXmlApplicationContext("application01.xml");
+        // 其它常用类型的注入方式
+        com.babyblue.pojo_.User  user = ac.getBean("user", com.babyblue.pojo_.User .class);
+        System.out.println(user);
+
+    }
+
 }

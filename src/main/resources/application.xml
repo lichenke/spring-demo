@@ -13,5 +13,10 @@
         <property name="name" value="李宸可"></property>
     </bean>
 
+    <bean class="com.babyblue.pojo.User" id="user2">
+        <constructor-arg name="age" value="18"></constructor-arg>
+        <constructor-arg name="name" value="hh"></constructor-arg>
+    </bean>
+
     <bean class="com.babyblue.pojo.Company" id="company"></bean>
 </beans>

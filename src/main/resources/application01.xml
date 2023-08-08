@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.babyblue.pojo_.User" id="user">
+        <property name="name" value="李宸可"></property>
+        <property name="age" value="18"></property>
+        <property name="cat">
+            <bean class="com.babyblue.pojo_.Cat">
+                <constructor-arg name="name" value="宽宽"></constructor-arg>
+            </bean>
+        </property>
+        <property name="hobbies">
+            <array>
+                <value>唱</value>
+                <value>跳</value>
+                <value>篮球</value>
+            </array>
+        </property>
+        <property name="skills">
+            <list>
+                <value>java</value>
+                <value>html</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="so sorry" value-ref="cat"></entry>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean class="com.babyblue.pojo_.Cat" id="cat">
+        <property name="name" value="秋菊"></property>
+    </bean>
+
+</beans>

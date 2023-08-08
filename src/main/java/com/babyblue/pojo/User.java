@@ -9,6 +9,7 @@ public class User {
         return name;
     }
 
+    // 使用属性注入，必须要提供对应的set方法
     public void setName(String name) {
         this.name = name;
     }
