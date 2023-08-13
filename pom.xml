@@ -12,6 +12,8 @@
     <modules>
         <module>spring-ioc-demo</module>
         <module>spring-rookie</module>
+        <module>spring-testcase-xml</module>
+        <module>spring-testcase-java</module>
     </modules>
 
     <properties>
