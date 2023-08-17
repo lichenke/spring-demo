@@ -6,18 +6,20 @@ import com.babyblue.framework.annotation.GPService;
 import com.babyblue.framework.bean.MyBeanDefinition;
 import com.babyblue.framework.bean.support.MyBeanDefinitionReader;
 import com.babyblue.framework.core.MyBeanFactory;
+import com.babyblue.framework.exception.MyIoCException;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MyApplicationContext implements MyBeanFactory {
 
     private final Map<String, MyBeanDefinition> bdMap = new LinkedHashMap<>();
 
-    private final Map<String, Object> factoryBeanInstanceCache = new HashMap<>();
+    // IoC容器
+    private final Map<String, Object> factoryBeanInstanceCache = new ConcurrentHashMap<>();
 
 
     public MyApplicationContext(String configLocation) {
@@ -45,18 +47,24 @@ public class MyApplicationContext implements MyBeanFactory {
 
     @Override
     public Object getBean(String beanName) {
-        Object o = factoryBeanInstanceCache.get(beanName);
-        if (o != null) {
-            return o;
+        Object o;
+        if (!factoryBeanInstanceCache.containsKey(beanName)) {
+            synchronized (this.factoryBeanInstanceCache) {
+                if (!factoryBeanInstanceCache.containsKey(beanName)) {
+                    MyBeanDefinition myBeanDefinition = bdMap.get(beanName);
+                    o = instantiateBean(myBeanDefinition);
+                    if (o != null) {
+                        populateBean(o);
+                        factoryBeanInstanceCache.put(beanName, o);
+                    }
+                } else {
+                    o = factoryBeanInstanceCache.get(beanName);
+                }
+                return o;
+            }
+        } else {
+            return factoryBeanInstanceCache.get(beanName);
         }
-        MyBeanDefinition myBeanDefinition = bdMap.get(beanName);
-        // 反射创建实例化对象
-        Object obj = instantiateBean(myBeanDefinition);
-        if (obj != null) {
-            populateBean(obj);
-            factoryBeanInstanceCache.put(beanName, obj);
-        }
-        return obj;
     }
 
     private void populateBean(Object obj) {
@@ -86,7 +94,7 @@ public class MyApplicationContext implements MyBeanFactory {
                 //相当于 demoAction.demoService = ioc.get("com.gupaoedu.demo.service.IDemoService");
                 field.set(obj, this.factoryBeanInstanceCache.get(autowiredBeanName));
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                throw new MyIoCException(e);
             }
         }
     }
