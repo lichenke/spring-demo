@@ -1,7 +1,9 @@
 package com.babyblue.demo.service.impl;
 
 
+import com.babyblue.demo.service.IModifyService;
 import com.babyblue.demo.service.IQueryService;
+import com.babyblue.framework.annotation.GPAutowired;
 import com.babyblue.framework.annotation.GPService;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +16,9 @@ import java.util.Date;
  */
 @GPService
 public class QueryService implements IQueryService {
+
+    @GPAutowired
+    private IModifyService modifyService;
 
     /**
      * 查询

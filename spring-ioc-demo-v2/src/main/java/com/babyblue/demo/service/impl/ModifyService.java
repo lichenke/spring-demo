@@ -2,6 +2,8 @@ package com.babyblue.demo.service.impl;
 
 
 import com.babyblue.demo.service.IModifyService;
+import com.babyblue.demo.service.IQueryService;
+import com.babyblue.framework.annotation.GPAutowired;
 import com.babyblue.framework.annotation.GPService;
 
 /**
@@ -11,6 +13,9 @@ import com.babyblue.framework.annotation.GPService;
  */
 @GPService
 public class ModifyService implements IModifyService {
+
+    @GPAutowired
+    private IQueryService queryService;
 
     /**
      * 增加
