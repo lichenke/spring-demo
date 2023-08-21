@@ -9,17 +9,25 @@ import com.babyblue.framework.core.MyBeanFactory;
 import com.babyblue.framework.exception.MyIoCException;
 
 import java.lang.reflect.Field;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MyApplicationContext implements MyBeanFactory {
 
     private final Map<String, MyBeanDefinition> bdMap = new LinkedHashMap<>();
 
-    // IoC容器
-    private final Map<String, Object> factoryBeanInstanceCache = new ConcurrentHashMap<>();
+    //循环依赖的标识，当前正在创建的BeanName，Mark一下
+    private final Set<String> singletonsCurrentlyInCreation = new HashSet<>();
+
+    //一级缓存：保存成熟的Bean（IoC容器）
+    private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>();
+
+    //二级缓存：保存早期的Bean
+    private final Map<String, Object> earlySingletonObjects = new HashMap<>();
+
+
+    // 三级缓存：保存仅完成实例化的Bean
+    private final Map<String, Object> factoryBeanObjectCache = new HashMap<>();
 
 
     public MyApplicationContext(String configLocation) {
@@ -48,23 +56,47 @@ public class MyApplicationContext implements MyBeanFactory {
     @Override
     public Object getBean(String beanName) {
         Object o;
-        if (!factoryBeanInstanceCache.containsKey(beanName)) {
-            synchronized (this.factoryBeanInstanceCache) {
-                if (!factoryBeanInstanceCache.containsKey(beanName)) {
+        if (!singletonObjects.containsKey(beanName)) {
+            synchronized (this.singletonObjects) {
+                if (!singletonObjects.containsKey(beanName)) {
                     MyBeanDefinition myBeanDefinition = bdMap.get(beanName);
-                    o = instantiateBean(myBeanDefinition);
+                    Object singleton = getSingleton(beanName, myBeanDefinition);
+                    if (singleton != null) {
+                        return singleton;
+                    }
+                    //标记bean正在创建
+                    singletonsCurrentlyInCreation.add(beanName);
+                    //反射实例化对象，把A先放入到三级缓存中
+                    o = instantiateBean(beanName, myBeanDefinition);
                     if (o != null) {
                         populateBean(o);
-                        factoryBeanInstanceCache.put(beanName, o);
+                        this.singletonObjects.put(beanName, o);
                     }
+                    // 把创建标记清空
+                    singletonsCurrentlyInCreation.remove(beanName);
                 } else {
-                    o = factoryBeanInstanceCache.get(beanName);
+                    o = singletonObjects.get(beanName);
                 }
                 return o;
             }
         } else {
-            return factoryBeanInstanceCache.get(beanName);
+            return singletonObjects.get(beanName);
         }
+    }
+
+    private Object getSingleton(String beanName, MyBeanDefinition myBeanDefinition) {
+        // 去一级缓存拿
+        Object bean = singletonObjects.get(beanName);
+        if (bean == null && singletonsCurrentlyInCreation.contains(beanName)) {
+            // 从二级缓存拿
+            bean = earlySingletonObjects.get(beanName);
+            if (bean == null) {
+                bean = instantiateBean(beanName, myBeanDefinition);
+                // 将创建出的对象放入到二级缓存中
+                earlySingletonObjects.put(beanName, bean);
+            }
+        }
+        return bean;
     }
 
     private void populateBean(Object obj) {
@@ -85,14 +117,11 @@ public class MyApplicationContext implements MyBeanFactory {
             field.setAccessible(true);
 
             try {
-                //  A  --->  实例化 ---> 放入到容器 --->  属性注入 --> 把A放入到factoryBeanInstanceCache容器里面去了
-                //  B  --->  实例化 ---> 放入到容器 --->  属性注入A(完成) --> 然后把B放入到factoryBeanInstanceCache里面去了
-                if (this.factoryBeanInstanceCache.get(autowiredBeanName) == null) {
-                    continue;
-                }
+                // if (this.factoryBeanInstanceCache.get(autowiredBeanName) == null) {
+                //    continue;
+                // }
                 // b.setA()
-                //相当于 demoAction.demoService = ioc.get("com.gupaoedu.demo.service.IDemoService");
-                field.set(obj, this.factoryBeanInstanceCache.get(autowiredBeanName));
+                field.set(obj, getBean(autowiredBeanName));
             } catch (IllegalAccessException e) {
                 throw new MyIoCException(e);
             }
@@ -106,12 +135,23 @@ public class MyApplicationContext implements MyBeanFactory {
         }
     }
 
-    private Object instantiateBean(MyBeanDefinition bd) {
+    private Object instantiateBean(String beanName, MyBeanDefinition bd) {
+        // 未来可能存在循环依赖，可能需要在三级缓存中直接拿
+        if (bd.isSingleton() && this.factoryBeanObjectCache.containsKey(beanName)) {
+            return this.factoryBeanObjectCache.get(beanName);
+        }
+
         String clazzName = bd.getBeanClassName();
         Object instance = null;
         try {
             Class<?> clazz = Class.forName(clazzName);
             instance = clazz.getDeclaredConstructor().newInstance();
+            // 如果是代理对象，触发AOP的逻辑
+            this.factoryBeanObjectCache.put(beanName, instance);
+            this.factoryBeanObjectCache.put(clazz.getName(), instance);
+            for (Class<?> i : clazz.getInterfaces()) {
+                this.factoryBeanObjectCache.put(i.getName(), instance);
+            }
         } catch (Exception e) {
             System.out.println("无法初始化此类：" + clazzName);
         }

@@ -26,5 +26,9 @@ public class MyBeanDefinition {
         return false;
     }
 
+    public boolean isSingleton() {
+        return true;
+    }
+
 
 }

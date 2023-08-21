@@ -20,6 +20,9 @@ public class QueryService implements IQueryService {
     @GPAutowired
     private IModifyService modifyService;
 
+    @GPAutowired
+    private IQueryService queryService; // 自己依赖自己
+
     /**
      * 查询
      */
